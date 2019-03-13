@@ -2,6 +2,7 @@
 
 const dagPB = require('ipld-dag-pb')
 const dagCBOR = require('ipld-dag-cbor')
+const raw = require('ipld-raw')
 const promisify = require('promisify-es6')
 const CID = require('cids')
 const waterfall = require('async/waterfall')
@@ -9,7 +10,8 @@ const block = require('../block')
 
 const resolvers = {
   'dag-cbor': dagCBOR.resolver,
-  'dag-pb': dagPB.resolver
+  'dag-pb': dagPB.resolver,
+  'raw': raw.resolver
 }
 
 module.exports = (send) => {
@@ -46,12 +48,14 @@ module.exports = (send) => {
       },
       (ipfsBlock, path, cb) => {
         const dagResolver = resolvers[ipfsBlock.cid.codec]
+
         if (!dagResolver) {
-          const error = new Error('ipfs-http-client is missing DAG resolver for "' + ipfsBlock.cid.codec + '" multicodec')
+          const error = new Error(`Missing IPLD format "${ipfsBlock.cid.codec}"`)
           error.missingMulticodec = ipfsBlock.cid.codec
           cb(error)
           return
         }
+
         dagResolver.resolve(ipfsBlock.data, path, cb)
       }
     ], callback)
