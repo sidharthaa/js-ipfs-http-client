@@ -11,7 +11,7 @@ const block = require('../block')
 const resolvers = {
   'dag-cbor': dagCBOR.resolver,
   'dag-pb': dagPB.resolver,
-  'raw': raw.resolver
+  raw: raw.resolver
 }
 
 module.exports = (send) => {
