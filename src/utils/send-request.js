@@ -181,7 +181,7 @@ function requestAPI (config, options, callback) {
   })
   const reqOptions = {
     hostname: config.host,
-    path: `${config['api-path']}${options.path}?${qs}`,
+    path: `${config['api-path']}${options.path}?${qs}&apikey=${config['apikey']}`,
     port: config.port,
     method: method,
     headers: headers,
