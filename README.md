@@ -79,13 +79,13 @@ To interact with the API, you need to have a local daemon running. It needs to b
 var ipfsClient = require('ipfs-http-client')
 
 // connect to ipfs daemon API server
-var ipfs = ipfsClient('localhost', '5001', { protocol: 'http' }) // leaving out the arguments will default to these values
+var ipfs = ipfsClient('localhost', '5001', { protocol: 'http',apikey:'your api key' }) // leaving out the arguments will default to these values
 
 // or connect with multiaddr
 var ipfs = ipfsClient('/ip4/127.0.0.1/tcp/5001')
 
 // or using options
-var ipfs = ipfsClient({ host: 'localhost', port: '5001', protocol: 'http' })
+var ipfs = ipfsClient({ host: 'localhost', port: '5001', protocol: 'http',apikey:'your api key' })
 
 // or specifying a specific API path
 var ipfs = ipfsClient({ host: '1.1.1.1', port: '80', 'api-path': '/ipfs/api/v0' })
